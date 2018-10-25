@@ -11,7 +11,7 @@ namespace HomeworkApp
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World");
-            Console.ReadKey();
+            int.TryParse(Console.ReadLine(), out var answer);
         }
     }
 }
