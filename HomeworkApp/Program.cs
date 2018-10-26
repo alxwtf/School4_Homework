@@ -281,12 +281,18 @@ namespace HomeworkApp
             {
                 if (discount[discnumb].ItsExpirable == false)
                 {
-                    return $"Скидка составляет {discount[discnumb].DiscountValue} руб.\n Цена со скидкой:{product[prodnumb].Price - discount[discnumb].DiscountValue} руб.";
+                    return $"Скидка составляет {discount[discnumb].DiscountValue} руб.\n Цена со скидкой:{product[prodnumb].Price - discount[discnumb].DiscountValue - (product[prodnumb].Price * discount[discnumb].DiscountValue / 100)} руб.";
                 }
                 else if (discount[discnumb].DiscountStartDate <= DateTime.Now && discount[discnumb].DiscountEndDate >= DateTime.Now)
                 {
                     return $"Скидка составляет {discount[discnumb].DiscountValue} руб.\n" +
-                     $"Цена на данный товар с выбранной скидкой составляет {product[prodnumb].Price - discount[discnumb].DiscountValue} руб." +
+                     $"Цена на данный товар с выбранной скидкой составляет {product[prodnumb].Price - discount[discnumb].DiscountValue - (product[prodnumb].Price * discount[discnumb].DiscountValue / 100)} руб." +
+                     $"\nСкидка действительна с {discount[discnumb].DiscountStartDate} по {discount[discnumb].DiscountEndDate}";
+                }
+                else if (product[prodnumb].EndSellDate > DateTime.Now && discount[discnumb].DiscountStartDate <= DateTime.Now && discount[discnumb].DiscountEndDate >= DateTime.Now)
+                {
+                    return $"Скидка составляет {discount[discnumb].DiscountValue}%\n" +
+                     $"Цена на данный товар с выбранной скидкой составляет {product[prodnumb].Price - (product[prodnumb].Price * discount[discnumb].DiscountValue / 100)} руб." +
                      $"\nСкидка действительна с {discount[discnumb].DiscountStartDate} по {discount[discnumb].DiscountEndDate}";
                 }
                 else return $"Скидка недействительна Цена продукта:{product[prodnumb].Price}";
